@@ -1,0 +1,68 @@
+
+<html>
+
+<head>
+  <title> City Weather </title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+
+
+<body>
+  <form>
+    Enter a city in Utah:
+    <input type="text" class="city-field" value="">
+  </br>
+  Suggestions:
+  <span class="suggestions"> </span>
+  <input class="submit-button" type="submit" value="Submit">
+</form>
+
+<textarea class="selected-city"> Submit a value </textarea>
+
+<div class="disp-weather"> No weather available now </div>
+
+<script>
+$(".submit-button").click(function(e){
+  var cityName = $(".city-field").val();
+  $(".selected-city").text(cityName);
+  e.preventDefault();
+  var submitURL = "https://api.wunderground.com/api/e0e9ca7454646d05/geolookup/conditions/q/Utah/" + cityName + ".json";
+  $.ajax({
+    url: submitURL,
+    dataType: "jsonp",
+    success: function(data){
+      var location = data['location']['city'];
+      var temperature = data['current_observation']['temperature_string'];
+      var currentWeather = data['current_observation']['weather'];
+      var weatherList = "<ul>";
+      weatherList += "<li>Location: " + location;
+      weatherList += "<li>Temperature: " + temperature;
+      weatherList += "<li>Weather: " + currentWeather;
+      weatherList += "</ul>";
+      $(".disp-weather").html(weatherList);
+    }
+  });
+});
+$(".city-field").keyup(function() {
+  var url = "http://vdbmovies.com/getcity?q=";
+  url += $(".city-field").val();
+  $.getJSON(url, function(data) {
+    var everything = "<ul>";
+      $.each(data, function(i, item) {
+        everything += "<li> " + data[i].city + "</li>";
+      });
+      everything += "</ul>";
+      $(".suggestions").html($(everything));
+    })
+    .fail(function(jqXHR, textStatus, errorThrown){
+      console.err("Status: " + textStatus);
+      console.err("Content: " + jqXHR.responseText);
+    })
+    .done(function(){
+      console.log("Done");
+    });
+  });
+</script>
+</body>
+
+</html>

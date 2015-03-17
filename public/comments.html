@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script>
+getComments = function(){
+  var get_url = "http://vdbmovies.com/comment";
+  $.getJSON(get_url, function(data){
+    console.log(data);
+    var everything;
+    everything = "<ul>";
+    $.each(data, function(i, item){
+      everything += "<li> Name: " + data[i].Name + " Comment: " + data[i].Comment + "</li>";
+    });
+    everything += "</ul>";
+    $(".current-comments").html(everything);
+  });
+}
+$(document).ready(function(){
+    getComments();
+    $(".input-button").click(function(){
+        var myobj = {Name:$(".name").val(),Comment:$(".comment").val()};
+        jobj = JSON.stringify(myobj);
+        var post_url = "http://vdbmovies.com/comment";
+        $.post(post_url,jobj,function(data,textStatus) {
+          $(".json").text(jobj);
+          $(".status").text(textStatus);
+          getComments();
+        });
+    });
+});
+
+</script>
+</head>
+<body>
+
+  <form class="comment-form" action="">
+    Name: <input type="text" class="name" value=""><br>
+    comment: <input type="text" class="comment" value=""><br>
+  </form>
+
+  <button class="input-button">Comment!</button>
+  <div>
+    <h3> the JSON being sent</h3>
+    <div class="json"></div>
+    <div class="status"></div>
+  </div>
+  <div>
+    <h3> Current Comments </h3>
+    <div class="current-comments"></div>
+  </div>
+
+</body>
+</html>

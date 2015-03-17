@@ -1,0 +1,42 @@
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="style.less" />
+  <link rel="stylesheet" href="colorbox.css" />
+  <script src="jquery.js"></script>
+  <script src="vscript.js"></script>
+  <script src="jquery.colorbox.js"></script>
+  <script>
+    $(document).ready(function() {
+    	$(".vid").colorbox({
+    		inline: 'true'
+    	});
+    });
+  </script>
+</head>
+
+<body>
+  <div class="inner_body">
+    <div class="head_div">
+      <a href="vdm.htm">
+        <img class="logo" src="pictures/logo_2-1_small.png" onmouseover="glow()" onmouseout="unglow()" align="left">
+        </img>
+      </a>
+      <h1 class="header">VDB Movies</h1>
+    </div>
+		<nav class="nav">
+			<ul class="primary-nav">
+				<li class="nav-li"><a class="home-btn nav-a" href="vdm.htm">home</a></li>
+				<li class="nav-li"><a class="nav-a" href="hkp.htm">Harold Kublar</a></li>
+				<li class="nav-li"><a class="nav-a" href="#">movies</a></li>
+				<li class="nav-li"><a class="nav-a" href="#" onClick="window.open('mailto:vdbmovies@gmail.com')">contact</a></li>
+			</ul>
+		</nav>
+    <h2 class="hk_title">Harold Kublar III </br> <i> coming soon </i>
+    </h2>
+    <div class="hk3c" style='padding:10px; background:#fff;'>
+			<iframe src="https://player.vimeo.com/video/121530529" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    </div>
+  </div>
+
+</html>.
