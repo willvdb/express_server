@@ -22,7 +22,8 @@ app.use('/', express.static('./public', {
 }));
 
 app.post('/test', function(req, res){
-  var stuff = JSON.parse(req.data);
+  var data = (req || req.data) || '{\'comment\':\'howdy world\'}';
+  var stuff = JSON.parse(data);
   console.log(stuff);
   res.writeHead(200);
   res.end(stuff);
