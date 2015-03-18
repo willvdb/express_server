@@ -22,10 +22,17 @@ $(document).ready(function(){
         var myobj = {Name:$(".name").val(),Comment:$(".comment").val()};
         jobj = JSON.stringify(myobj);
         var post_url = "http://vdbmovies.com/comment";
-        $.post(post_url,jobj,function(data,textStatus) {
-          $(".json").text(jobj);
-          $(".status").text(textStatus);
-          getComments();
+        $jQuery.ajax({
+          url: post_url,
+          type: "POST",
+          data: jobj,
+          dataType: "json",
+          contentType: "application/json; charset=utf-8",
+          success: function(){
+            $(".json").text(jobj);
+            $(".status").text(textStatus);
+            getComments();
+          }
         });
     });
 });
