@@ -3,6 +3,7 @@ var https = require('https');
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
+var mongo = require('mongodb');
 var app = express();
 var options = {
   host: '127.0.0.1',
