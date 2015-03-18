@@ -17,24 +17,16 @@ function isEmpty(str) {
   return (!str || 0 === str.length);
 }
 
+app.use(express.bodyParser());
+
 app.use('/', express.static('./public', {
   maxAge: 60 * 60 * 1000
 }));
 
 app.post('/test', function(req, res){
-  var jsonData = "";
-  req.on('data', function(chunk){
-    jsonData += chunk;
-  });
-  req.on('end', function(){
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    console.log(jsonData);
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    var reqObj = JSON.parse(jsonData);
-    console.log(reqObj);
-    res.writeHead(200);
-    res.end("good");
-  });
+  console.log(req.body.data.json);
+  res.writeHead(200);
+  res.end("");
 });
 
 app.get('/getcity', function(req, res) {
