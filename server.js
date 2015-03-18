@@ -22,10 +22,16 @@ app.use('/', express.static('./public', {
 }));
 
 app.post('/test', function(req, res){
-  var data = (req || req.data) || '{\'comment\':\'howdy world\'}';
-  console.log(data);
-  res.writeHead(200);
-  res.end(stuff);
+  var jsonData;
+  req.on('data', function(chunk){
+    jsonData += chunk;
+  });
+  req.on('end', function(){
+    reqObj = JSON.parse(jsonData);
+    console.log(reqObj);
+    res.writeHead(200);
+    res.end(JSON.stringify(reqObj));
+  });
 });
 
 app.get('/getcity', function(req, res) {
