@@ -27,6 +27,9 @@ app.post('/test', function(req, res){
     jsonData += chunk;
   });
   req.on('end', function(){
+    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    console.log(jsonData);
+    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     reqObj = JSON.parse(jsonData);
     console.log(reqObj);
     res.writeHead(200);
