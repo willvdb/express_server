@@ -59,23 +59,17 @@ app.get('/getcity', function(req, res) {
       });
 
     app.post('/comment', function(req, res) {
-      var jsonData = "";
-      req.on('data', function(chunk) {
-        jsonData += chunk;
-      });
-      req.on('end', function() {
-        var reqObj = JSON.parse(jsonData);
-        var mongo_client = mongo.MongoClient;
-        mongo_client.connect("mongodb://localhost/weather", function(err, db) {
-          if (err) {
-            console.log("error");
-          } else {
-            db.collection('comments').insert(reqObj, function(err, records) {
-              res.writeHead(200);
-              res.end("");
-            });
-          }
-        });
+      console.log(req.body);
+      var mongo_client = mongo.MongoClient;
+      mongo_client.connect("mongodb://localhost/weather", function(err, db) {
+        if (err) {
+          console.log("error");
+        } else {
+          db.collection('comments').insert(req.body, function(err, records) {
+            res.writeHead(200);
+            res.end("");
+          });
+        }
       });
     });
 

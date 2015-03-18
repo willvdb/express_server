@@ -22,7 +22,7 @@ $(document).ready(function(){
         var myobj = {Name:$(".name").val(),Comment:$(".comment").val()};
         jobj = JSON.stringify(myobj);
         var post_url = "http://vdbmovies.com/comment";
-        $jQuery.ajax({
+        $.ajax({
           url: post_url,
           type: "POST",
           data: jobj,
