@@ -18,23 +18,23 @@ getComments = function(){
 }
 $(document).ready(function(){
     getComments();
-    $(".input-button").click(function(){
-        var myobj = {Name:$(".name").val(),Comment:$(".comment").val()};
-        jobj = JSON.stringify(myobj);
-        var post_url = "http://vdbmovies.com/comment";
-        $.ajax({
-          url: post_url,
-          type: "POST",
-          data: jobj,
-          dataType: "json",
-          contentType: "application/json; charset=utf-8",
-          success: function(){
-            $(".json").text(jobj);
-            $(".status").text(textStatus);
-            getComments();
-          }
-        });
-    });
+});
+$(".input-button").click(function(){
+  var myobj = {Name:$(".name").val(),Comment:$(".comment").val()};
+  jobj = JSON.stringify(myobj);
+  var post_url = "http://vdbmovies.com/comment";
+  $.ajax({
+    url: post_url,
+    type: "POST",
+    data: jobj,
+    dataType: "json",
+    contentType: "application/json; charset=utf-8",
+    success: function(){
+      $(".json").text(jobj);
+      $(".status").text(textStatus);
+      getComments();
+    }
+  });
 });
 
 </script>
@@ -47,6 +47,7 @@ $(document).ready(function(){
   </form>
 
   <button class="input-button">Comment!</button>
+  <button class="refresh-button">Comment!</button>
   <div>
     <h3> the JSON being sent</h3>
     <div class="json"></div>
