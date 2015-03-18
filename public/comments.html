@@ -16,9 +16,7 @@ getComments = function(){
     $(".current-comments").html(everything);
   });
 }
-$(document).ready(function(){
-    getComments();
-});
+$(document).ready(getComments());
 $(".input-button").click(function(){
   var myobj = {Name:$(".name").val(),Comment:$(".comment").val()};
   jobj = JSON.stringify(myobj);
@@ -36,6 +34,7 @@ $(".input-button").click(function(){
     }
   });
 });
+$(".refresh-button").click(getComments());
 
 </script>
 </head>
@@ -47,7 +46,7 @@ $(".input-button").click(function(){
   </form>
 
   <button class="input-button">Comment!</button>
-  <button class="refresh-button">Comment!</button>
+  <button class="refresh-button">Refresh!</button>
   <div>
     <h3> the JSON being sent</h3>
     <div class="json"></div>
