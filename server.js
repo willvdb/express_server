@@ -13,6 +13,10 @@ var options = {
 http.createServer(app).listen(80);
 https.createServer(options, app).listen(443);
 
+function isEmpty(str) {
+  return (!str || 0 === str.length);
+}
+
 app.use('/', express.static('./public', {
   maxAge: 60 * 60 * 1000
 }));
