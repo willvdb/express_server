@@ -4,6 +4,7 @@ var http = require('http');
 var fs = require('fs');
 var url = require('url');
 var mongo = require('mongodb');
+var bodyParser = require('body-parser');
 var app = express();
 var options = {
   host: '127.0.0.1',
@@ -17,14 +18,15 @@ function isEmpty(str) {
   return (!str || 0 === str.length);
 }
 
-app.use(express.bodyParser());
+app.use(bodyParser());
 
 app.use('/', express.static('./public', {
   maxAge: 60 * 60 * 1000
 }));
 
 app.post('/test', function(req, res){
-  console.log(req.body.data.json);
+  var data = JSON.parse(req.body['data.json']);
+  console.log(data);
   res.writeHead(200);
   res.end("");
 });
