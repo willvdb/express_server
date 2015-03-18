@@ -21,6 +21,13 @@ app.use('/', express.static('./public', {
   maxAge: 60 * 60 * 1000
 }));
 
+app.post('/test', function(req, res){
+  var stuff = JSON.parse(req.data);
+  console.log(stuff);
+  res.writeHead(200);
+  res.end(stuff);
+});
+
 app.get('/getcity', function(req, res) {
       var urlObj = url.parse(req.url, true, false);
         fs.readFile("cities.dat.txt", function(err, data) {
