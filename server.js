@@ -22,7 +22,7 @@ app.use('/', express.static('./public', {
 }));
 
 app.post('/test', function(req, res){
-  var jsonData;
+  var jsonData = "";
   req.on('data', function(chunk){
     jsonData += chunk;
   });
@@ -30,10 +30,10 @@ app.post('/test', function(req, res){
     console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     console.log(jsonData);
     console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    reqObj = JSON.parse(jsonData);
+    var reqObj = JSON.parse(jsonData);
     console.log(reqObj);
     res.writeHead(200);
-    res.end(JSON.stringify(reqObj));
+    res.end("good");
   });
 });
 
