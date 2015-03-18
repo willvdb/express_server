@@ -23,8 +23,7 @@ app.use('/', express.static('./public', {
 
 app.post('/test', function(req, res){
   var data = (req || req.data) || '{\'comment\':\'howdy world\'}';
-  var stuff = JSON.parse(data);
-  console.log(stuff);
+  console.log(data);
   res.writeHead(200);
   res.end(stuff);
 });
