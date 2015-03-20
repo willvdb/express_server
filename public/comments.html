@@ -1,53 +1,36 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<script>
-getComments = function(){
-    var get_url = "http://vdbmovies.com/comment";
-    $.getJSON(get_url, function(data){
-      console.log(data);
-      var everything;
-      everything = "<ul>";
-      $.each(data, function(i, item){
-        everything += "<li> Name: " + data[i].Name + " Comment: " + data[i].Comment + "</li>";
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script>
+    getComments = function() {
+      var get_url = "http://vdbmovies.com/comment";
+      $.getJSON(get_url, function(data) {
+        console.log(data);
+        var everything;
+        everything = "<ul>";
+        $.each(data, function(i, item) {
+          everything += "<li> Name: " + data[i].Name + " Comment: " + data[i].Comment + "</li>";
+        });
+        everything += "</ul>";
+        $(".current-comments").html(everything);
       });
-      everything += "</ul>";
-      $(".current-comments").html(everything);
+    }
+    $(document).ready(function() {
+      getComments();
     });
-  }
-</script>
-<script>
-  $(document).ready(function(){
-    getComments();
-  });
-
-  $(".input-button").click(function(){
-    var myobj = {Name:$(".name").val(),Comment:$(".comment").val()};
-    jobj = JSON.stringify(myobj);
-    var post_url = "http://vdbmovies.com/comment";
-    $.ajax({
-      url: post_url,
-      type: "POST",
-      data: jobj,
-      dataType: "json",
-      contentType: "application/json; charset=utf-8",
-      success: function(){
-        $(".json").text(jobj);
-        $(".status").text(textStatus);
-        getComments();
-      }
-    });
-  });
-  $(".refresh-button").click(getComments());
-
-</script>
+  </script>
 </head>
+
 <body>
 
   <form class="comment-form" action="">
-    Name: <input type="text" class="name" value=""><br>
-    comment: <input type="text" class="comment" value=""><br>
+    Name:
+    <input type="text" class="name" value="">
+    <br> comment:
+    <input type="text" class="comment" value="">
+    <br>
   </form>
 
   <button class="input-button">Comment!</button>
@@ -62,5 +45,30 @@ getComments = function(){
     <div class="current-comments"></div>
   </div>
 
+  <script>
+    $(".input-button").click(function() {
+      var myobj = {
+        Name: $(".name").val(),
+        Comment: $(".comment").val()
+      };
+      jobj = JSON.stringify(myobj);
+      var post_url = "http://vdbmovies.com/comment";
+      $.ajax({
+        url: post_url,
+        type: "POST",
+        data: jobj,
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        success: function() {
+          $(".json").text(jobj);
+          $(".status").text(textStatus);
+          getComments();
+        }
+      });
+    });
+    $(".refresh-button").click(getComments());
+  </script>
+
 </body>
+
 </html>
