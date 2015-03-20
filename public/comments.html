@@ -52,6 +52,7 @@
         Comment: $(".comment").val()
       };
       jobj = JSON.stringify(myobj);
+      $(".json").text(jobj);
       var post_url = "http://vdbmovies.com/comment";
       $.ajax({
         url: post_url,
@@ -60,19 +61,7 @@
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         success: function() {
-          $(".json").text(jobj);
-          $(".status").text(textStatus);
-          var get_url = "http://vdbmovies.com/comment";
-          $.getJSON(get_url, function(data) {
-            console.log(data);
-            var everything;
-            everything = "<ul>";
-            $.each(data, function(i, item) {
-              everything += "<li> Name: " + data[i].Name + " Comment: " + data[i].Comment + "</li>";
-            });
-            everything += "</ul>";
-            $(".current-comments").html(everything);
-          });
+          $(".status").text("success!");
         }
       });
     });
