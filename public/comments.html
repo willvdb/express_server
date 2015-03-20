@@ -15,9 +15,7 @@ getComments = function(){
     everything += "</ul>";
     $(".current-comments").html(everything);
   });
-}
-$(document).ready(function(){
-  getComments();
+  }
   $(".input-button").click(function(){
     var myobj = {Name:$(".name").val(),Comment:$(".comment").val()};
     jobj = JSON.stringify(myobj);
@@ -36,7 +34,11 @@ $(document).ready(function(){
     });
   });
   $(".refresh-button").click(getComments());
-});
+</script>
+<script>
+  $(document).ready(function(){
+    getComments();
+  });
 
 </script>
 </head>
