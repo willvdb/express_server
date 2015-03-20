@@ -4,18 +4,24 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
 getComments = function(){
-  var get_url = "http://vdbmovies.com/comment";
-  $.getJSON(get_url, function(data){
-    console.log(data);
-    var everything;
-    everything = "<ul>";
-    $.each(data, function(i, item){
-      everything += "<li> Name: " + data[i].Name + " Comment: " + data[i].Comment + "</li>";
+    var get_url = "http://vdbmovies.com/comment";
+    $.getJSON(get_url, function(data){
+      console.log(data);
+      var everything;
+      everything = "<ul>";
+      $.each(data, function(i, item){
+        everything += "<li> Name: " + data[i].Name + " Comment: " + data[i].Comment + "</li>";
+      });
+      everything += "</ul>";
+      $(".current-comments").html(everything);
     });
-    everything += "</ul>";
-    $(".current-comments").html(everything);
-  });
   }
+</script>
+<script>
+  $(document).ready(function(){
+    getComments();
+  });
+
   $(".input-button").click(function(){
     var myobj = {Name:$(".name").val(),Comment:$(".comment").val()};
     jobj = JSON.stringify(myobj);
@@ -34,11 +40,6 @@ getComments = function(){
     });
   });
   $(".refresh-button").click(getComments());
-</script>
-<script>
-  $(document).ready(function(){
-    getComments();
-  });
 
 </script>
 </head>
