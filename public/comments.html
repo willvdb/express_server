@@ -62,11 +62,33 @@
         success: function() {
           $(".json").text(jobj);
           $(".status").text(textStatus);
-          getComments();
+          var get_url = "http://vdbmovies.com/comment";
+          $.getJSON(get_url, function(data) {
+            console.log(data);
+            var everything;
+            everything = "<ul>";
+            $.each(data, function(i, item) {
+              everything += "<li> Name: " + data[i].Name + " Comment: " + data[i].Comment + "</li>";
+            });
+            everything += "</ul>";
+            $(".current-comments").html(everything);
+          });
         }
       });
     });
-    $(".refresh-button").click(getComments());
+    $(".refresh-button").click(function(){
+      var get_url = "http://vdbmovies.com/comment";
+      $.getJSON(get_url, function(data) {
+        console.log(data);
+        var everything;
+        everything = "<ul>";
+        $.each(data, function(i, item) {
+          everything += "<li> Name: " + data[i].Name + " Comment: " + data[i].Comment + "</li>";
+        });
+        everything += "</ul>";
+        $(".current-comments").html(everything);
+      });
+    });
   </script>
 
 </body>
